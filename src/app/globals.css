@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --pf-canvas: #F7F7F5;
+  --pf-surface: #FFFFFF;
+  --pf-subtle: #EDEDEB;
+  --pf-ink: #111111;
+  --pf-muted: #5F5F5F;
+  --pf-accent: #E11D48;
+  --pf-accent-text: #FFFFFF;
+  --pf-border: rgba(17, 17, 17, 0.24);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-pf-canvas: var(--pf-canvas);
+  --color-pf-surface: var(--pf-surface);
+  --color-pf-subtle: var(--pf-subtle);
+  --color-pf-ink: var(--pf-ink);
+  --color-pf-muted: var(--pf-muted);
+  --color-pf-accent: var(--pf-accent);
+  --color-pf-accent-text: var(--pf-accent-text);
+  --color-pf-border: var(--pf-border);
+
+  --font-sans: var(--font-sans), "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  --font-mono: var(--font-mono), "JetBrains Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  border-radius: 0px;
+}
+
+html,
+body {
+  background-color: var(--pf-canvas);
+  color: var(--pf-ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+.pf-grid-bg {
+  background-color: var(--pf-canvas);
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.pf-heading {
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.pf-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus visible accessibility */
+:focus-visible {
+  outline: 2px solid var(--pf-accent);
+  outline-offset: 2px;
+}
+
+/* Serrated thermal receipt edges */
+.receipt-edge-top {
+  height: 10px;
+  width: 100%;
+  background:
+    linear-gradient(-45deg, var(--pf-surface) 5px, transparent 0) 0 5px,
+    linear-gradient(45deg, var(--pf-surface) 5px, transparent 0) 0 5px;
+  background-repeat: repeat-x;
+  background-size: 10px 10px;
+}
+
+.receipt-edge-bottom {
+  height: 10px;
+  width: 100%;
+  background:
+    linear-gradient(-135deg, var(--pf-surface) 5px, transparent 0) 0 0,
+    linear-gradient(135deg, var(--pf-surface) 5px, transparent 0) 0 0;
+  background-repeat: repeat-x;
+  background-size: 10px 10px;
+}
+
+/* Subtle ambient scanline for Immersive Mode */
+@keyframes pf-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.pf-ambient-scan {
+  animation: pf-scan 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-ambient-scan {
+    animation: none;
+    display: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
