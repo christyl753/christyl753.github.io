@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowDownRight, MapPin, ShoppingBag, Terminal } from "lucide-react";
 import { PROFILE } from "@/data/portfolio";
@@ -101,14 +103,23 @@ export function HeroSection({ simpleMode }: HeroSectionProps) {
               {/* Center Portrait, Monogram & Specs */}
               <div className="my-5 space-y-5">
                 <div className="flex items-center gap-4">
-                  <div className="relative h-24 w-24 shrink-0 overflow-hidden border border-[var(--pf-ink)] bg-[var(--pf-subtle)] sm:h-28 sm:w-28">
+                  <div
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
+                    className="relative h-24 w-24 shrink-0 select-none overflow-hidden border border-[var(--pf-ink)] bg-[var(--pf-subtle)] sm:h-28 sm:w-28"
+                  >
                     <Image
                       src="/images/christ-tiantse.jpg"
-                      alt="Portrait de Tiantse Christ"
+                      alt="Portrait de Christ Tiantse"
                       fill
                       priority
+                      draggable={false}
                       sizes="(max-width: 640px) 96px, 112px"
-                      className="object-cover object-top"
+                      className="pointer-events-none select-none object-cover object-top"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 z-10 select-none"
                     />
                   </div>
                   <div className="min-w-0 flex-1">
