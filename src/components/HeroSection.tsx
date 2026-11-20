@@ -3,8 +3,7 @@
 import Image from "next/image";
 import { PROFILE } from "@/data/portfolio";
 
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const PORTRAIT_SRC = `${BASE_PATH}/images/christ-tiantse.jpg`;
+const PORTRAIT_SRC = "/images/christ-tiantse.jpg";
 
 export function HeroSection() {
   return (
