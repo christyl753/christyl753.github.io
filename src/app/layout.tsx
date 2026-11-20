@@ -1,37 +1,14 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Christ Tiantse — Étudiant en génie informatique · IA & Génie Logiciel",
+  title: "Christ Tiantse — Étudiant en génie informatique · IA & Systèmes",
   description:
     "Portfolio de Christ Aimant Tiantse Takamgno, étudiant en génie informatique à l'UQO (Gatineau). Projets en IA locale (Alyx), systèmes Linux/embarqués, SQL, Node.js et C/C++.",
   openGraph: {
-    title: "Tiantse Christ — Portfolio Génie Informatique",
+    title: "Christ Tiantse — Portfolio Génie Informatique",
     description:
-      "Systèmes embarqués, IA appliquée locale, pilotes Linux, SQL et C/C++. Disponible pour un stage à Gatineau et en télétravail.",
+      "Systèmes embarqués, Linux, IA locale (Alyx), SQL, API REST et C/C++. Disponible pour un stage à Gatineau.",
     locale: "fr_CA",
     type: "website",
   },
@@ -44,9 +21,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         suppressHydrationWarning
-        className={`${cormorant.variable} ${dmSans.variable} ${jetbrainsMono.variable} pf-grid-bg antialiased selection:bg-[#E11D48] selection:text-white`}
+        className="antialiased selection:bg-[#9CE0A8] selection:text-[#111613]"
       >
         {children}
       </body>

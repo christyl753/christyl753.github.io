@@ -1,28 +1,44 @@
 export interface Competency {
   id: string;
-  sku: string;
-  monogram: string;
+  symbol: string;
   title: string;
-  category: string;
-  metric: string;
+  keywords: string;
   description: string;
-  icon: "cpu" | "terminal" | "database" | "code";
+}
+
+export interface WorkflowStep {
+  num: string;
+  title: string;
+  description: string;
+}
+
+export interface TechnicalChoice {
+  title: string;
+  description: string;
 }
 
 export interface Project {
   id: string;
-  code: string;
-  sku: string;
-  monogram: string;
+  number: string;
+  slugPath: string;
+  categoryLabel: string;
+  cardCategory: string;
   title: string;
-  category: string;
-  year: string;
-  summary: string;
-  outcome: string;
-  stack: string[];
-  architecture: string[];
+  heroTitle: string;
+  subtitle: string;
+  cardSummary: string;
+  stackLine: string;
   repoUrl: string;
-  icon: "bot" | "keyboard" | "database" | "cpu";
+  visualType: "alyx" | "arduino" | "grid" | "terminal";
+  codeHeader: string;
+  codeSnippet: string;
+  ideaParagraph: string;
+  challenge: string;
+  pillars: string[];
+  workflowTitle: string;
+  workflowSteps: WorkflowStep[];
+  workflowFootnote: string;
+  choices: TechnicalChoice[];
 }
 
 export interface TimelineItem {
@@ -36,157 +52,383 @@ export interface TimelineItem {
 }
 
 export const PROFILE = {
+  shortHandle: "ct_",
   fullName: "Christ Tiantse",
   legalName: "Christ Aimant Tiantse Takamgno",
-  brandCode: "ATELIER.006",
-  role: "Étudiant en génie informatique · IA & Génie Logiciel",
+  role: "Étudiant en génie informatique · UQO, Gatineau.",
+  heroHeadline: "Du silicium à l’IA locale.",
+  heroStack: "IA Locale · Linux & Embarqué · C/C++ · SQL & API",
   location: "Gatineau, QC",
   availability: "Disponible pour un stage",
-  heroHeadline:
-    "Christ Tiantse — Étudiant en informatique passionné par les systèmes embarqués et l’IA appliquée.",
-  heroValueProp:
-    "Étudiant en génie informatique à l'UQO. Je développe des logiciels et des systèmes (IA locale, Linux, embarqué, web) et je recherche un stage ou un poste en ingénierie.",
   aboutBio:
-    "Étudiant en génie informatique à l'Université du Québec en Outaouais (UQO), je m'implique activement dans la vie étudiante comme membre exécutif (Affaires internes) et gestionnaire du site web et de l'infrastructure (ceguqo.ca) au Conseil des étudiants en génie. J'ai également participé aux Jeux de Génie 2026. Mes passions : les systèmes d'exploitation, les systèmes embarqués et le basket.",
+    "Étudiant en génie informatique à l'Université du Québec en Outaouais (UQO), je m'implique activement dans la vie étudiante comme membre exécutif (Affaires internes) et gestionnaire du site web et de l'infrastructure au Conseil des étudiants en génie. J'ai également participé aux Jeux de Génie 2026. Mes passions : les systèmes d'exploitation, les systèmes embarqués et le basket.",
   email: "tiac02@uqo.ca",
-  secondaryEmail: "tiantsechrist@gmail.com",
   linkedin: "https://www.linkedin.com/in/tiantse-christ-3a71062b8",
   github: "https://github.com/christyl753",
-  alyxRepo: "https://github.com/christyl753/Alyx",
   languages: "Français (courant) · Anglais (intermédiaire B1)",
 };
 
 export const COMPETENCIES: Competency[] = [
   {
     id: "comp-ai",
-    sku: "SKU-01 · IA",
-    monogram: "PY",
-    title: "IA Locale & Orchestration",
-    category: "Ollama · LM Studio · Gemma",
-    metric: "Tool Calling",
+    symbol: "AI",
+    title: "IA Locale & Python",
+    keywords: "Ollama · Gemma · tool calling",
     description:
-      "Développement d'assistants hors ligne en Python avec modèles de langage locaux (Ollama, LM Studio, Gemma) et appel d'outils sécurisé.",
-    icon: "cpu",
+      "Assistants hors ligne en Python avec modèles de langage locaux (Ollama, LM Studio, Gemma) et appel d'outils sécurisé.",
   },
   {
-    id: "comp-linux",
-    sku: "SKU-02 · SYS",
-    monogram: "LNX",
-    title: "Linux & Systèmes Embarqués",
-    category: "Arch · Fedora · ARM/AVR",
-    metric: "Noyau & VM",
+    id: "comp-os",
+    symbol: "OS",
+    title: "Linux & Embarqué",
+    keywords: "Arch · Arduino · ARM / AVR",
     description:
-      "Administration Linux (Arch, Fedora/Nobara), pilotes matériels (clavier 4×4 Arduino), chaînes ARM/AVR et personnalisation KDE Plasma.",
-    icon: "terminal",
+      "Systèmes Arch et Fedora/Nobara, pilotes clavier 4×4 Arduino, KDE Plasma et chaînes de développement embarqué.",
   },
   {
-    id: "comp-sql",
-    sku: "SKU-03 · WEB/BDD",
-    monogram: "SQL",
-    title: "Développement Web, API REST & SQL",
-    category: "Node.js · SQL · UML",
-    metric: "Web & API",
+    id: "comp-web",
+    symbol: "SQL",
+    title: "Web, API & Modélisation",
+    keywords: "Node.js · API REST · UML",
     description:
-      "Bases solides en développement front-end (HTML, CSS, JavaScript) et back-end (Node.js, API REST, SQL), complétées par la modélisation UML sous Modelio.",
-    icon: "database",
+      "Bases en front-end (HTML, CSS, JS) et back-end (Node.js, API REST, SQL) ainsi que modélisation UML sous Modelio.",
   },
   {
-    id: "comp-cpp",
-    sku: "SKU-04 · DEV",
-    monogram: "C++",
-    title: "Langages C / C++, Java & GPU",
-    category: "C · C++ · Java · NVIDIA",
-    metric: "Notions GPU",
+    id: "comp-gpu",
+    symbol: "{ }",
+    title: "C / C++, Java & GPU",
+    keywords: "Pointeurs · patrons · notions CUDA",
     description:
-      "Programmation système en C/C++, développement orienté objet en Java et notions d'architecture des GPU NVIDIA avec apprentissage continu autour de CUDA.",
-    icon: "code",
+      "Programmation C/C++ et Java, notions d'architecture des GPU NVIDIA et apprentissage continu autour de CUDA.",
   },
 ];
 
 export const PROJECTS: Project[] = [
   {
     id: "alyx",
-    code: "PRJ-001",
-    sku: "SKU-ALYX-01",
-    monogram: "AI",
-    title: "Alyx — Assistant de bureau IA hors ligne",
-    category: "IA Locale · Python & .NET 8",
-    year: "2026",
-    summary:
-      "Assistant de bureau multiplateforme (Windows et Linux) propulsé par un backend Python et une interface .NET 8, dialoguant avec des modèles locaux sans dépendance cloud.",
-    outcome:
-      "Ouverture/fermeture d'applications, gestion de fichiers, mode vocal et validation explicite de l'utilisateur avant toute action sensible.",
-    stack: ["Python", ".NET 8", "Ollama / LM Studio / Gemma", "Tool Calling"],
-    architecture: [
-      "Backend Python orchestrant des modèles locaux (Ollama, LM Studio, Gemma) avec appel d'outils.",
-      "Interface de bureau .NET 8 compatible Windows et Linux intégrant un mode vocal.",
-      "Garde-fou de sécurité demandant systématiquement l'accord de l'utilisateur avant les actions sensibles.",
-    ],
+    number: "01",
+    slugPath: "~/portfolio/projet_01",
+    categoryLabel: "PROJET 01 / IA LOCALE",
+    cardCategory: "IA LOCALE / PYTHON / .NET 8",
+    title: "Alyx — Assistant IA hors ligne",
+    heroTitle: "Alyx, assistant IA hors ligne.",
+    subtitle:
+      "Orchestrer des modèles locaux et piloter son ordinateur en toute confidentialité.",
+    cardSummary:
+      "Assistant de bureau Windows/Linux avec backend Python, interface .NET 8, mode vocal et appel d'outils sécurisé.",
+    stackLine: "PYTHON · .NET 8 · OLLAMA · LM STUDIO · GEMMA",
     repoUrl: "https://github.com/christyl753/Alyx",
-    icon: "bot",
+    visualType: "alyx",
+    codeHeader: "VOIX / TEXTE → PYTHON → .NET 8",
+    codeSnippet: `// alyx_agent.py
+
+model = load_local("gemma")
+intent = model.call_tool(prompt)
+
+if intent.is_sensitive():
+  ask_user_approval(intent)
+
+execute_local(intent)`,
+    ideaParagraph:
+      "Un assistant de bureau multiplateforme (Windows et Linux) propulsé par un backend Python et une interface .NET 8 qui dialogue avec des modèles locaux (Ollama, LM Studio, Gemma) pour gérer des fichiers, ouvrir des applications et répondre en mode vocal.",
+    challenge:
+      "Exécuter des actions système concrètes via l'appel d'outils (tool calling) sans jamais compromettre le contrôle ni la confidentialité des données.",
+    pillars: [
+      "01 / Inférence 100 % locale",
+      "02 / Appel d'outils système",
+      "03 / Validation utilisateur",
+    ],
+    workflowTitle: "De la commande à l'action sécurisée.",
+    workflowSteps: [
+      {
+        num: "01",
+        title: "Capturer",
+        description:
+          "Recevoir la requête par texte ou via le mode vocal dans l'interface .NET 8.",
+      },
+      {
+        num: "02",
+        title: "Interpréter",
+        description:
+          "Transmettre le contexte au modèle local (Ollama, LM Studio ou Gemma).",
+      },
+      {
+        num: "03",
+        title: "Planifier",
+        description:
+          "Identifier l'outil système requis (fichiers, lancement ou fermeture d'app).",
+      },
+      {
+        num: "04",
+        title: "Confirmer",
+        description:
+          "Demander l'accord explicite de l'utilisateur avant toute action sensible.",
+      },
+      {
+        num: "05",
+        title: "Exécuter",
+        description:
+          "Appliquer l'action en local et retourner le résultat sans appel cloud.",
+      },
+    ],
+    workflowFootnote:
+      "✓ Toutes les inférences et opérations restent sur la machine de l'utilisateur.",
+    choices: [
+      {
+        title: "Séparation Python / .NET 8",
+        description:
+          "Découpler l'orchestration IA en Python de l'interface de bureau .NET 8 pour faciliter la portabilité Windows et Linux.",
+      },
+      {
+        title: "Garde-fou avant action sensible",
+        description:
+          "Toute opération critique sur les fichiers ou applications passe par une confirmation manuelle avant exécution.",
+      },
+    ],
   },
   {
     id: "pilote-linux",
-    code: "PRJ-002",
-    sku: "SKU-LNX-02",
-    monogram: "LNX",
-    title: "Pilote Clavier 4×4 Arduino & Linux Personnalisé",
-    category: "Systèmes Embarqués & Arch Linux",
-    year: "2025–2026",
-    summary:
-      "Pilote Linux permettant d'écrire avec un clavier matriciel 4×4 Arduino sur ordinateur, complété par un système Arch Linux personnalisé orienté développement embarqué.",
-    outcome:
-      "Environnement complet testé en machine virtuelle avec bureau KDE Plasma, application d'accueil PyQt6 et chaînes ARM/AVR.",
-    stack: ["C", "Arch Linux", "PyQt6", "ARM / AVR · Arduino IDE"],
-    architecture: [
-      "Interfaçage d'un clavier matriciel 4×4 Arduino vers les entrées clavier sous Linux.",
-      "Base Arch Linux avec environnement KDE Plasma et application de bienvenue développée en Python (PyQt6).",
-      "Intégration des chaînes de compilation embarquées ARM, AVR et Arduino IDE, validée en machine virtuelle.",
-    ],
+    number: "02",
+    slugPath: "~/portfolio/projet_02",
+    categoryLabel: "PROJET 02 / EMBARQUÉ & LINUX",
+    cardCategory: "EMBARQUÉ / C / ARCH LINUX",
+    title: "Pilote 4×4 Arduino & Linux perso",
+    heroTitle: "Clavier 4×4 & Linux personnalisé.",
+    subtitle:
+      "Relier un clavier matriciel Arduino au système et bâtir un environnement Arch Linux embarqué.",
+    cardSummary:
+      "Pilote Linux pour clavier 4×4 Arduino et distribution Arch Linux (KDE Plasma, PyQt6, chaînes ARM/AVR) testée en VM.",
+    stackLine: "C · ARCH LINUX · ARDUINO · PYQT6 · ARM / AVR",
     repoUrl: "https://github.com/christyl753",
-    icon: "keyboard",
+    visualType: "arduino",
+    codeHeader: "ARDUINO 4×4 → SÉRIE → LINUX",
+    codeSnippet: `// keypad_driver.c
+
+key = scan_matrix_4x4();
+if (debounce_ok(key)) {
+  serial_send(key_code);
+}
+
+// host_linux: map_to_input(key_code);`,
+    ideaParagraph:
+      "D'un côté, un pilote Linux permettant d'écrire directement sur ordinateur à l'aide d'un clavier matriciel 4×4 relié à un Arduino. De l'autre, un système Linux personnalisé sur base Arch Linux doté de KDE Plasma, d'une application d'accueil en Python (PyQt6) et des chaînes ARM/AVR.",
+    challenge:
+      "Traduire de façon fiable chaque frappe matérielle sans rebond et assembler un environnement Linux embarqué reproductible en machine virtuelle.",
+    pillars: [
+      "01 / Balayage matriciel 4×4",
+      "02 / Mappage d'entrée Linux",
+      "03 / Environnement Arch & PyQt6",
+    ],
+    workflowTitle: "De la touche physique au système.",
+    workflowSteps: [
+      {
+        num: "01",
+        title: "Balayer",
+        description:
+          "Lire les lignes et colonnes de la matrice 4×4 sur le microcontrôleur Arduino.",
+      },
+      {
+        num: "02",
+        title: "Filtrer",
+        description:
+          "Éliminer les rebonds mécaniques pour isoler chaque pression de touche.",
+      },
+      {
+        num: "03",
+        title: "Transmettre",
+        description:
+          "Envoyer le code de touche vers l'hôte Linux via la liaison série.",
+      },
+      {
+        num: "04",
+        title: "Traduire",
+        description:
+          "Convertir le signal reçu en événement clavier reconnu par le système.",
+      },
+      {
+        num: "05",
+        title: "Tester en VM",
+        description:
+          "Valider le tout dans l'environnement Arch Linux (KDE Plasma, PyQt6, ARM/AVR).",
+      },
+    ],
+    workflowFootnote:
+      "↻ Environnement embarqué complet validé en machine virtuelle avant déploiement matériel.",
+    choices: [
+      {
+        title: "Base Arch Linux modulable",
+        description:
+          "Construire le système paquet par paquet avec KDE Plasma et uniquement les chaînes ARM, AVR et Arduino IDE nécessaires.",
+      },
+      {
+        title: "Application d'accueil PyQt6",
+        description:
+          "Offrir un point d'entrée clair en Python pour vérifier rapidement les outils de développement dès le démarrage.",
+      },
+    ],
   },
   {
     id: "sql-systemes",
-    code: "PRJ-003",
-    sku: "SKU-SQL-03",
-    monogram: "SQL",
+    number: "03",
+    slugPath: "~/portfolio/projet_03",
+    categoryLabel: "PROJET 03 / WEB, API & SQL",
+    cardCategory: "WEB / NODE.JS / SQL / UML",
     title: "TicketPulse, Gestion de Stock & SQL",
-    category: "Architecture Logicielle · SQL & Web",
-    year: "2025–2026",
-    summary:
-      "Plateforme de billetterie en temps réel TicketPulse (projet d'équipe GEN1423), site de gestion de stock avec API REST Node.js et modélisation de systèmes (réservation d'hôtel, transport en commun).",
-    outcome:
-      "API REST fonctionnelle, routage structuré, requêtes SQL optimisées et diagrammes UML complets réalisés sous Modelio.",
-    stack: ["SQL", "Node.js", "API REST", "UML (Modelio)"],
-    architecture: [
-      "TicketPulse (GEN1423) : conception collaborative d'une plateforme de billetterie en temps réel.",
-      "Site de gestion de stock : création et configuration d'une API REST en Node.js avec gestion des routes.",
-      "Modélisation complète sous Modelio (diagrammes UML) pour un système de réservation d'hôtel et de navigation pour transport en commun.",
-    ],
+    heroTitle: "API REST, SQL & modélisation UML.",
+    subtitle:
+      "Structurer des données relationnelles, des routes Node.js et des architectures logicielles claires.",
+    cardSummary:
+      "Billetterie temps réel TicketPulse (GEN1423), site de gestion de stock avec API REST Node.js et diagrammes UML sous Modelio.",
+    stackLine: "SQL · NODE.JS · API REST · HTML / CSS / JS · UML",
     repoUrl: "https://github.com/christyl753",
-    icon: "database",
+    visualType: "grid",
+    codeHeader: "CLIENT → API REST → SQL",
+    codeSnippet: `// routes/stock.js
+
+app.get("/api/items", async (req, res) => {
+  const rows = await db.query(
+    "SELECT id, nom, qte FROM stock"
+  );
+  res.json(rows);
+});`,
+    ideaParagraph:
+      "Un ensemble de projets académiques à l'UQO combinant bases front-end et back-end : la plateforme de billetterie en temps réel TicketPulse (projet d'équipe GEN1423), un site de gestion de stock avec API REST en Node.js, et la modélisation UML sous Modelio (réservation d'hôtel, transport en commun).",
+    challenge:
+      "Assurer la cohérence entre le modèle conceptuel (UML), les requêtes SQL et les routes exposées par l'API REST.",
+    pillars: [
+      "01 / Modéliser en UML",
+      "02 / Structurer les routes REST",
+      "03 / Fiabiliser les données SQL",
+    ],
+    workflowTitle: "Du diagramme à l'API fonctionnelle.",
+    workflowSteps: [
+      {
+        num: "01",
+        title: "Modéliser",
+        description:
+          "Concevoir les cas d'utilisation, classes et séquences dans Modelio.",
+      },
+      {
+        num: "02",
+        title: "Normaliser",
+        description:
+          "Traduire les entités en tables relationnelles SQL cohérentes.",
+      },
+      {
+        num: "03",
+        title: "Exposer",
+        description:
+          "Créer et configurer les routes REST en Node.js pour le stock et les billets.",
+      },
+      {
+        num: "04",
+        title: "Connecter",
+        description:
+          "Relier l'interface HTML/CSS/JS aux points de terminaison de l'API.",
+      },
+      {
+        num: "05",
+        title: "Vérifier",
+        description:
+          "Tester les parcours utilisateurs et la validité des réponses en équipe.",
+      },
+    ],
+    workflowFootnote:
+      "✓ Travail en équipe structuré avec Git, GitHub et revues de conception UML.",
+    choices: [
+      {
+        title: "Conception UML avant le code",
+        description:
+          "Poser les diagrammes dans Modelio réduit les incohérences lors du travail collaboratif sur TicketPulse.",
+      },
+      {
+        title: "API REST lisible en Node.js",
+        description:
+          "Organiser les routes par ressource pour séparer proprement la logique serveur de l'interface web.",
+      },
+    ],
   },
   {
     id: "cpp-ingenierie",
-    code: "PRJ-004",
-    sku: "SKU-CPP-04",
-    monogram: "C++",
-    title: "Ingénierie Systèmes C / C++ & Java",
-    category: "Programmation Bas-Niveau & Conception",
-    year: "2024–2026",
-    summary:
-      "Réalisations académiques et techniques en C, C++ et Java mettant l'accent sur les structures de données, la gestion mémoire et les patrons de conception.",
-    outcome:
-      "Code modulaire, fiable et documenté, aligné sur les bonnes pratiques du génie logiciel et du développement système.",
-    stack: ["C", "C++", "Java", "Git & GitHub"],
-    architecture: [
-      "Gestion rigoureuse de la mémoire, pointeurs et structures dynamiques en C et C++.",
-      "Application des patrons de conception (Design Patterns) et principes orientés objet en Java.",
-      "Versionnement collaboratif avec Git et GitHub.",
-    ],
+    number: "04",
+    slugPath: "~/portfolio/projet_04",
+    categoryLabel: "PROJET 04 / SYSTÈMES & BAS-NIVEAU",
+    cardCategory: "SYSTÈMES / C / C++ / JAVA",
+    title: "Ingénierie C / C++, Java & GPU",
+    heroTitle: "Fondamentaux C/C++ & notions GPU.",
+    subtitle:
+      "Maîtriser la mémoire, les patrons de conception et explorer l'architecture des GPU NVIDIA.",
+    cardSummary:
+      "Structures de données, gestion mémoire en C/C++, conception orientée objet en Java et apprentissage continu autour de CUDA.",
+    stackLine: "C · C++ · JAVA · GIT · ARCHITECTURE GPU NVIDIA",
     repoUrl: "https://github.com/christyl753",
-    icon: "cpu",
+    visualType: "terminal",
+    codeHeader: "MÉMOIRE → STRUCTURES → CONCEPTION",
+    codeSnippet: `// core_module.cpp
+
+struct Buffer {
+  size_t size;
+  int* data;
+};
+
+// Gestion rigoureuse mémoire + patrons OO
+// Exploration continue : architecture GPU / CUDA`,
+    ideaParagraph:
+      "Un socle de réalisations en C, C++ et Java centré sur la gestion fine de la mémoire, les structures de données et les patrons de conception, complété par des notions d'architecture des GPU NVIDIA et un apprentissage actif de CUDA.",
+    challenge:
+      "Écrire un code bas-niveau sûr et maintenable tout en construisant progressivement une compréhension solide du calcul parallèle sur GPU.",
+    pillars: [
+      "01 / Gestion mémoire C/C++",
+      "02 / Patrons de conception Java",
+      "03 / Apprentissage GPU / CUDA",
+    ],
+    workflowTitle: "De la logique au code maîtrisé.",
+    workflowSteps: [
+      {
+        num: "01",
+        title: "Concevoir",
+        description:
+          "Choisir les structures de données et patrons de conception adaptés.",
+      },
+      {
+        num: "02",
+        title: "Implémenter",
+        description:
+          "Développer les modules en C, C++ ou Java avec un découpage clair.",
+      },
+      {
+        num: "03",
+        title: "Contrôler",
+        description:
+          "Vérifier l'allocation, la libération mémoire et les cas limites.",
+      },
+      {
+        num: "04",
+        title: "Versionner",
+        description:
+          "Suivre les évolutions et organiser le dépôt avec Git et GitHub.",
+      },
+      {
+        num: "05",
+        title: "Approfondir",
+        description:
+          "Poursuivre l'exploration de l'architecture des GPU NVIDIA et de CUDA.",
+      },
+    ],
+    workflowFootnote:
+      "✓ Approche pragmatique : valider la justesse du programme avant toute optimisation.",
+    choices: [
+      {
+        title: "Rigueur mémoire en C/C++",
+        description:
+          "Privilégier des responsabilités claires sur la durée de vie des données pour éviter les comportements indéfinis.",
+      },
+      {
+        title: "Montée en compétence GPU progressive",
+        description:
+          "S'appuyer sur les bases d'architecture matérielle NVIDIA pour aborder le parallélisme CUDA étape par étape.",
+      },
+    ],
   },
 ];
 
@@ -198,7 +440,7 @@ export const TIMELINE: TimelineItem[] = [
     organization: "Conseil des étudiants en génie (CEG), UQO",
     location: "Gatineau, QC",
     impact:
-      "Achat, configuration et gestion du nom de domaine (ceguqo.ca) et des paramètres DNS. Déploiement des outils en ligne, calendriers partagés (Outlook) et soutien technique.",
+      "Configuration et gestion du nom de domaine de l'association et des paramètres DNS. Déploiement des outils en ligne, calendriers partagés (Outlook) et soutien technique.",
     tag: "INFRASTRUCTURE",
   },
   {
@@ -208,7 +450,7 @@ export const TIMELINE: TimelineItem[] = [
     organization: "Conseil des étudiants en génie (CEG), UQO",
     location: "Gatineau, QC",
     impact:
-      "Accueil et orientation des étudiants, suivi des demandes et coordination inter-départements pour l'organisation des activités.",
+      "Accueil et orientation des étudiants, suivi des demandes et coordination inter-départements pour les activités de l'association.",
     tag: "LEADERSHIP",
   },
   {
@@ -218,7 +460,7 @@ export const TIMELINE: TimelineItem[] = [
     organization: "Jeux de Génie 2026",
     location: "Québec",
     impact:
-      "Résolution de défis d'ingénierie chronométrés en équipe multidisciplinaire sous contrainte technique et organisationnelle.",
+      "Résolution de défis d'ingénierie chronométrés en équipe multidisciplinaire sous contrainte technique.",
     tag: "COMPÉTITION",
   },
   {
@@ -228,7 +470,7 @@ export const TIMELINE: TimelineItem[] = [
     organization: "Université du Québec en Outaouais (UQO)",
     location: "Gatineau, QC",
     impact:
-      "Formation en systèmes d'exploitation, IA locale, génie logiciel, bases de données et architecture matérielle.",
+      "Systèmes d'exploitation, IA locale, génie logiciel, bases de données SQL et architecture matérielle.",
     tag: "FORMATION",
   },
   {
@@ -238,7 +480,7 @@ export const TIMELINE: TimelineItem[] = [
     organization: "Saleka",
     location: "Yaoundé",
     impact:
-      "Conception et mise en ligne de sites web professionnels à l'aide de systèmes de gestion de contenu (CMS) durant les vacances scolaires.",
+      "Conception de sites web avec des systèmes de gestion de contenu (CMS) durant les vacances scolaires.",
     tag: "EXPÉRIENCE",
   },
 ];

@@ -1,107 +1,57 @@
 @import "tailwindcss";
 
 :root {
-  --pf-canvas: #F7F7F5;
-  --pf-surface: #FFFFFF;
-  --pf-subtle: #EDEDEB;
-  --pf-ink: #111111;
-  --pf-muted: #5F5F5F;
-  --pf-accent: #E11D48;
-  --pf-accent-text: #FFFFFF;
-  --pf-border: rgba(17, 17, 17, 0.24);
+  --tk-bg: #F6F6F2;
+  --tk-dark: #111613;
+  --tk-dark-elevated: #17211B;
+  --tk-surface: #ECEFE9;
+  --tk-border: #DCE1D8;
+  --tk-divider: #E2E5DF;
+  --tk-ink: #111613;
+  --tk-muted: #5D6560;
+  --tk-mint: #9CE0A8;
+  --tk-mint-hover: #85D594;
+  --tk-green-ink: #3B6E4C;
+  --tk-dark-muted: #98A59C;
 }
 
 @theme inline {
-  --color-pf-canvas: var(--pf-canvas);
-  --color-pf-surface: var(--pf-surface);
-  --color-pf-subtle: var(--pf-subtle);
-  --color-pf-ink: var(--pf-ink);
-  --color-pf-muted: var(--pf-muted);
-  --color-pf-accent: var(--pf-accent);
-  --color-pf-accent-text: var(--pf-accent-text);
-  --color-pf-border: var(--pf-border);
-
-  --font-sans: var(--font-sans), "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-  --font-mono: var(--font-mono), "JetBrains Mono", monospace;
-}
-
-* {
-  border-radius: 0px;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 html,
 body {
-  background-color: var(--pf-canvas);
-  color: var(--pf-ink);
+  background-color: var(--tk-bg);
+  color: var(--tk-ink);
   font-family: var(--font-sans);
   overflow-x: clip;
 }
 
-.pf-grid-bg {
-  background-color: var(--pf-canvas);
-  background-image:
-    linear-gradient(rgba(17, 17, 17, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 17, 17, 0.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-.pf-heading {
-  letter-spacing: -0.035em;
+.tk-heading {
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
-.pf-tabular {
+.tk-tabular {
   font-variant-numeric: tabular-nums;
 }
 
-/* Focus visible accessibility */
 :focus-visible {
-  outline: 2px solid var(--pf-accent);
+  outline: 2px solid var(--tk-green-ink);
   outline-offset: 2px;
 }
 
-/* Serrated thermal receipt edges */
-.receipt-edge-top {
-  height: 10px;
-  width: 100%;
-  background:
-    linear-gradient(-45deg, var(--pf-surface) 5px, transparent 0) 0 5px,
-    linear-gradient(45deg, var(--pf-surface) 5px, transparent 0) 0 5px;
-  background-repeat: repeat-x;
-  background-size: 10px 10px;
+/* Hide scrollbar on horizontal mobile project carousel while keeping scroll functional */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-.receipt-edge-bottom {
-  height: 10px;
-  width: 100%;
-  background:
-    linear-gradient(-135deg, var(--pf-surface) 5px, transparent 0) 0 0,
-    linear-gradient(135deg, var(--pf-surface) 5px, transparent 0) 0 0;
-  background-repeat: repeat-x;
-  background-size: 10px 10px;
-}
-
-/* Subtle ambient scanline for Immersive Mode */
-@keyframes pf-scan {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(400%);
-  }
-}
-
-.pf-ambient-scan {
-  animation: pf-scan 7s linear infinite;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pf-ambient-scan {
-    animation: none;
-    display: none;
-  }
-
   *,
   *::before,
   *::after {
